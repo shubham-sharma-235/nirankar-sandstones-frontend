@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirankar Production</title>
+  <!-- in <head> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- before </body> -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <style>
+    .bs-header-3-main.d-flex.align-items-center {
+        height: 5rem;
+        background: #1f1f1f;
+    }
+    .bs-header-3-main-left .bs-main-navigation .navbar-nav li a {
+        color: #fff !important;
+    }
+    .bs-main-navigation .dropdown .dropdown-menu li a {
+        color: #000 !important;
+    }
+    .bs-core-feature-4-wrap {
+        background-color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Vendor JS -->
+  <script src="/assets/js/jquery-3.7.1.min.js"></script>
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/js/swiper-bundle.min.js"></script>
+  <script src="/assets/js/wow.js"></script>
+  <script src="/assets/js/text-type.js"></script>
+  <script src="/assets/js/matter.js"></script>
+  <script src="/assets/js/throwable.js"></script>
+  <script src="/assets/js/tilt.js"></script>
+  <script src="/assets/js/nice-select.min.js"></script>
+  <script src="/assets/js/marquee.min.js"></script>
+  <script src="/assets/js/magnific-popup.min.js"></script>
+  <script src="/assets/js/SplitText.min.js"></script>
+  <script src="/assets/js/gsap.min.js"></script>
+  <script src="/assets/js/CustomEase.min.js"></script>
+  <script src="/assets/js/counterup.min.js"></script>
+  <script src="/assets/js/waypoints.min.js"></script>
+  <script src="/assets/js/lenis.min.js"></script>
+  <script src="/assets/js/ScrollTrigger.min.js"></script>
+  <script src="/assets/js/main.js"></script>
+  
+  <!-- Custom Hero Script -->
+  <script>
+    window.addEventListener("load", () => {
+
+      const heroSection = document.querySelector(".nirankar-hero");
+      const heroTitle = document.getElementById("heroText");
+      const nirankarSlides = document.querySelectorAll(
+        ".nirankar-hero .hero-slide"
+      );
+
+      if (!heroSection || !heroTitle || !nirankarSlides.length) return;
+
+      let nirankarIndex = 0;
+      const nirankarDuration = 6000;
+
+      function nirankarNextSlide() {
+        nirankarSlides[nirankarIndex].classList.remove("active");
+
+        nirankarIndex =
+          (nirankarIndex + 1) % nirankarSlides.length;
+
+        nirankarSlides[nirankarIndex].classList.add("active");
+      }
+
+      setInterval(nirankarNextSlide, nirankarDuration);
+
+      window.addEventListener("scroll", () => {
+        const heroRect =
+          heroSection.getBoundingClientRect();
+
+        const scrollProgress = Math.min(
+          Math.max(
+            (0 - heroRect.top) /
+              heroSection.offsetHeight,
+            0
+          ),
+          1
+        );
+
+        const baseSize = 56;
+        const minSize = 28;
+
+        const newSize =
+          baseSize -
+          (baseSize - minSize) * scrollProgress;
+
+        heroTitle.style.fontSize = `${newSize}px`;
+        heroTitle.style.opacity =
+          1 - 0.4 * scrollProgress;
+      });
+    });
+  </script>
+</body>
+</html>
