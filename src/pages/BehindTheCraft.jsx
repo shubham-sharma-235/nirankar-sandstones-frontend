@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import BreadcrumbSection from "../components/BehindTheCraft/BtsBreadcrum";
-import Artisans from "../components/home/Artisans";
+import Artisans from "../components/Home/Artisans";
 import WorkProcessSection from "../components/BehindTheCraft/WorkProcessSection";
 import OperationalStrengths from "../components/BehindTheCraft/OperationalStrengths";
 
