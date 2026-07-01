@@ -5,7 +5,7 @@ import UspMarquee from "../components/about/UspMarquee";
 import AboutSectionOne from "../components/about/AboutSectionOne";
 import CounterSection from "../components/about/CounterSection";
 import AboutVideoSection from "../components/about/AboutVideoSection";
-import Artisans from "../components/home/Artisans";
+import Artisans from "../components/Home/Artisans";
 import WorkProcess from "../components/about/WorkProcess";
 
 function About () {
