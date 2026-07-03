@@ -2986,6 +2986,9 @@ input:focus::placeholder, textarea:focus::placeholder {
   margin-left: 30px;
   padding: 0;
 }
+.bs-main-navigation .navbar-nav li .dropdown-menu {
+  background-color: #000!important;
+}
 .mobile-main-navigation ul li .dropdown-menu li {
   padding: 13px 0;
 }
