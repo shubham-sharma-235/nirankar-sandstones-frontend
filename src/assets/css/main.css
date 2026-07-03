@@ -19458,3 +19458,9 @@ Primary style
       font-size: 71px !important;
     }
 }
+
+/* ----- Custom - Fixes ------- */
+
+.swiper-pagination,.swiper-pagination-bullet{
+  display: none!important;
+}

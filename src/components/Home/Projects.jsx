@@ -76,7 +76,7 @@ function Projects() {
   return (
     <>
       {/* project-start */}
-      <section className="bs-blog-6-area pt-60 pb-50">
+      <section className="bs-blog-6-area pt-60 pb-50 mb-200">
         <div className="container bs-container-1">
 
           <div className="bs-blog-5-sec-title d-flex justify-content-between align-items-end mb-50">
