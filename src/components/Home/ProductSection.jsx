@@ -31,10 +31,10 @@ const productCards = [
   {
     href: "./products/wall-panel.html",
     title: "Wall Panels",
-    img: "./assets/img/services/wall-panel-cover.jpg",
+    img: "https://nirankar-production.netlify.app/products/img/wall-panel/4.jpg",
     disc: "Artistic Wall Panels designed to create ambient with a touch of natural elegance.",
     bg: "assets/img/services/s4-card-bg.png",
-    defaultImg: "./assets/img/services/wall-panel-cover.jpg",
+    defaultImg: "https://nirankar-production.netlify.app/products/img/wall-panel/4.jpg",
     active: false,
   },
   {

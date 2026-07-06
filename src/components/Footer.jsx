@@ -108,7 +108,7 @@ function Footer(){
             
                   {/* right */}
                   <div className="bs-footer-4-contact">
-                    <h4 className="bs-h-1 title wa-split-up wa-capitalize wa-fix">get in touch</h4>
+                    <h4 className="bs-h-1 title wa-split-up wa-capitalize wa-fix">Get in touch</h4>
                     <div className="bs-footer-4-contact-link">
                       <p className="bs-p-4 link-title">Email</p>
                       <a href="mailto:Stonekarigaribynirankar@gmail.com" className="link-elm bs-p-4 wa-clip-left-right">Stonekarigaribynirankar@gmail.com</a>

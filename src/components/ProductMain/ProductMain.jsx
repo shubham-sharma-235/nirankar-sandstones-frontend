@@ -10,50 +10,62 @@ const serviceItems = [
   { number: "07", title: "Wall Panel",       href: "./products/wall-panel.html",       slide: 6 },
 ];
 
+// paths match original HTML exactly
 const slides = [
-  "./assets/category-img/fountain/Fountain/4.jpeg",
-  "./products/img/planter/planters/17.jpeg",
-  "./products/img/modern-art/Modern Art/10.jpeg",
-  "./products/img/statue/Statue/8.jpeg",
-  "./products/img/decorative-items/Decor/17.jpg",
-  "./products/img/table-console/Tablee/3.jpeg",
-  "./products/img/wall-panel/4.jpg",
+  "https://nirankar-production.netlify.app/products/img/fountain/Fountain/4.jpeg",
+  "https://nirankar-production.netlify.app/products/img/planter/planters/17.jpeg",
+  "https://nirankar-production.netlify.app/products/img/modern-art/Modern%20Art/10.jpeg",
+  "https://nirankar-production.netlify.app/products/img/statue/Statue/8.jpeg",
+  "https://nirankar-production.netlify.app/products/img/decorative-items/Decor/17.jpg",
+  "https://nirankar-production.netlify.app/products/img/table-console/Tablee/3.jpeg",
+  "https://nirankar-production.netlify.app/products/img/wall-panel/4.jpg",
 ];
 
 function ProductMain() {
 
-  
   useEffect(() => {
     const timer = setTimeout(() => {
-      const gsap        = window.gsap;
+      const gsap          = window.gsap;
       const ScrollTrigger = window.ScrollTrigger;
-      const SplitText   = window.SplitText;
-      const $           = window.jQuery;
-      const Swiper      = window.Swiper;
+      const SplitText     = window.SplitText;
+      const $             = window.jQuery;
+      const Swiper        = window.Swiper;
 
       if (!gsap || !$ || !Swiper) return;
 
       if (ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
       if (SplitText)     gsap.registerPlugin(SplitText);
 
-      // ── init swiper (fade, no touch — controlled by hover)
+      // destroy any existing swiper instance first
+      const swiperEl = document.querySelector(".bs-s5-active");
+      if (swiperEl?._swiperInstance) {
+        swiperEl._swiperInstance.destroy(true, true);
+      }
+
+      // init swiper — fade effect, no touch (hover controlled)
       const swiper = new Swiper(".bs-s5-active", {
         loop: false,
-        speed: 800,
+        speed: 600,
         effect: "fade",
         fadeEffect: { crossFade: true },
         allowTouchMove: false,
+        initialSlide: 0,
       });
 
-      // ── hover on left item → change right slide
-      document.querySelectorAll(".bs-services-5-item-single").forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          const slideIndex = parseInt(el.getAttribute("data-slide"));
-          if (!isNaN(slideIndex)) swiper.slideTo(slideIndex);
-        });
+      // HOVER: left item changes right slide
+      // Using jQuery delegated events so it works even after React renders
+      $(document).off("mouseenter.s5items", ".bs-services-5-item-single");
+      $(document).on("mouseenter.s5items", ".bs-services-5-item-single", function () {
+        const slideIndex = parseInt($(this).attr("data-slide"));
+        if (!isNaN(slideIndex) && swiper) {
+          swiper.slideTo(slideIndex, 600);
+        }
       });
 
-      // ── bg-color scrub animation
+      // store swiper for cleanup
+      if (swiperEl) swiperEl._swiperInstance = swiper;
+
+      // bg-color scrub animation
       if (ScrollTrigger) {
         gsap.timeline({
           scrollTrigger: {
@@ -69,7 +81,7 @@ function ProductMain() {
         });
       }
 
-      // ── wa-split-right (heading)
+      // wa-split-right on heading
       if (SplitText) {
         document.querySelectorAll(".bs-services-5-area .wa-split-right").forEach((el) => {
           const split = new SplitText(el, {
@@ -95,7 +107,7 @@ function ProductMain() {
         });
       }
 
-      // ── wa-fadeInUp (video + each service item)
+      // wa-fadeInUp on service items
       document.querySelectorAll(".bs-services-5-area .wa-fadeInUp").forEach((el) => {
         gsap.from(el, {
           y: 30,
@@ -110,7 +122,7 @@ function ProductMain() {
         });
       });
 
-      // ── right slider clip reveal
+      // right slider clip reveal
       gsap.fromTo(
         ".bs-services-5-slider",
         { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" },
@@ -126,22 +138,19 @@ function ProductMain() {
         }
       );
 
-      // store swiper for cleanup
-      const swiperEl = document.querySelector(".bs-s5-active");
-      if (swiperEl) swiperEl._swiperInstance = swiper;
-
     }, 150);
 
     return () => {
       clearTimeout(timer);
 
-      // destroy swiper
+      const $ = window.jQuery;
+      if ($) $(document).off("mouseenter.s5items", ".bs-services-5-item-single");
+
       const swiperEl = document.querySelector(".bs-s5-active");
       if (swiperEl?._swiperInstance) {
         swiperEl._swiperInstance.destroy(true, true);
       }
 
-      // kill scoped ScrollTriggers
       if (window.ScrollTrigger) {
         window.ScrollTrigger.getAll()
           .filter((t) => {
@@ -166,15 +175,13 @@ function ProductMain() {
             .bs-services-5-left {
               padding-bottom: 1.5rem !important;
             }
+            .inner-div {
+              display: none !important;
+            }
           }
           @media (max-width: 767px) {
             .bs-services-5-left {
               padding-bottom: 1rem !important;
-            }
-          }
-          @media (max-width: 1024px) {
-            .inner-div {
-              display: none !important;
             }
           }
         `}</style>
@@ -182,12 +189,11 @@ function ProductMain() {
         <div className="container bs-container-2">
           <div className="bs-services-5-wrap">
 
-            {/* ── left side ── */}
+            {/* left side */}
             <div className="bs-services-5-left wa-p-relative">
 
               <div className="bg-color"></div>
 
-              {/* section title */}
               <div className="bs-services-5-sec-title mb-50">
                 <h2
                   className="bs-sec-title-4 wa-split-right wa-capitalize"
@@ -197,7 +203,6 @@ function ProductMain() {
                 </h2>
               </div>
 
-              {/* drone video — hidden on tablet/mobile */}
               <div className="inner-div">
                 <div className="bs-services-5-img-1 wa-fix wa-img-cover wa-fadeInUp">
                   <video
@@ -210,7 +215,6 @@ function ProductMain() {
                 </div>
               </div>
 
-              {/* service list */}
               <div className="bs-services-5-item">
                 {serviceItems.map((item) => (
                   <a
@@ -232,7 +236,7 @@ function ProductMain() {
 
             </div>
 
-            {/* ── right slider ── */}
+            {/* right slider */}
             <div
               className="bs-services-5-slider wa-p-relative wa-fix"
               data-cursor="-opaque"
