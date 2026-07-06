@@ -5,6 +5,7 @@ function Blogs () {
     return (
         <>
             <Header/>
+            
             <Footer/>
         </>
     )
